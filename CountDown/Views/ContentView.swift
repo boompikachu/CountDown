@@ -9,12 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
+
     var todayDate: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE, MMMM d"
         return formatter
     }
-
+    
     
     var body: some View {
         NavigationView() {
@@ -25,7 +26,14 @@ struct ContentView: View {
                 CountDownCardView()
             }
             .navigationBarTitle(Text("Events"))
-            .navigationBarItems(leading: Text(todayDate.string(from: Date())))
+            .navigationBarItems(
+                leading: Text(todayDate.string(from: Date())),
+                trailing: Button(action: {
+                    //
+                }, label: {
+                    Image(systemName: "plus")
+                })
+            )
         }
         
     }
