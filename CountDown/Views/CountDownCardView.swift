@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct CountDownCardView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     var body: some View {
         VStack() {
             HStack() {
@@ -18,15 +20,32 @@ struct CountDownCardView: View {
                     .font(.system(size: 40))
                     .minimumScaleFactor(0.01)
                     .padding(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 18)
-                            .stroke(Color.black, lineWidth: 3)
+                    .background(
+                        Rectangle()
+                            .opacity(K.cardTextOpacity)
+                            .cornerRadius(9)
+                            .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
+                            .blur(radius: 1)
                 )
+//                                        .overlay(
+//                                            RoundedRectangle(cornerRadius: 18)
+//                                                .stroke(Color.black, lineWidth: 3)
+//
+//                                    )
                     .padding(.trailing, 5)
                 Spacer()
                 Text("Boom's Birthday")
+                    .minimumScaleFactor(0.75)
                     .lineLimit(2)
                     .font(.system(size: 25))
+                    .padding(7)
+                    .background(
+                        Rectangle()
+                            .opacity(K.cardTextOpacity)
+                            .cornerRadius(9)
+                            .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
+                            .blur(radius: 1)
+                )
                 Spacer()
             }
             .frame(height: 100)
@@ -37,7 +56,7 @@ struct CountDownCardView: View {
                     .scaledToFill()
             )
                 .clipped()
-            .cornerRadius(9)
+                .cornerRadius(9)
         }
     }
 }

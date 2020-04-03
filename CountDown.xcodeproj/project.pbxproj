@@ -15,6 +15,7 @@
 		FE1F44132436ED3E00DF8F1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE1F44122436ED3E00DF8F1E /* Preview Assets.xcassets */; };
 		FE1F44162436ED3E00DF8F1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE1F44142436ED3E00DF8F1E /* LaunchScreen.storyboard */; };
 		FE1F44212436F84C00DF8F1E /* CountDownCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F44202436F84C00DF8F1E /* CountDownCardView.swift */; };
+		FE3C91AD24371C5400E4D4D4 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C91AC24371C5400E4D4D4 /* Constant.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FE1F44152436ED3E00DF8F1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE1F44172436ED3E00DF8F1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE1F44202436F84C00DF8F1E /* CountDownCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownCardView.swift; sourceTree = "<group>"; };
+		FE3C91AC24371C5400E4D4D4 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				FE1F44062436ED3900DF8F1E /* AppDelegate.swift */,
 				FE1F44082436ED3900DF8F1E /* SceneDelegate.swift */,
+				FE3C91AC24371C5400E4D4D4 /* Constant.swift */,
 				FE1F441D2436F42000DF8F1E /* Models */,
 				FE1F441F2436F43C00DF8F1E /* ViewModels */,
 				FE1F441E2436F43000DF8F1E /* Views */,
@@ -181,6 +184,7 @@
 				FE1F440E2436ED3900DF8F1E /* ContentView.swift in Sources */,
 				FE1F44092436ED3900DF8F1E /* SceneDelegate.swift in Sources */,
 				FE1F44212436F84C00DF8F1E /* CountDownCardView.swift in Sources */,
+				FE3C91AD24371C5400E4D4D4 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
