@@ -10,6 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var modalNewEventView = false
+    
     var todayDate: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE, MMMM d"
@@ -31,10 +33,14 @@ struct ContentView: View {
                 leading: Text(todayDate.string(from: Date()))
                     .foregroundColor(.gray),
                 trailing: Button(action: {
-                    //
+                    self.modalNewEventView = true
                 }, label: {
                     Image(systemName: "plus")
                         .scaleEffect(1.5)
+                }).sheet(isPresented: $modalNewEventView, content: {
+                    NewEventView(onDismiss: {
+                        self.modalNewEventView = false
+                    })
                 })
             )
         }
