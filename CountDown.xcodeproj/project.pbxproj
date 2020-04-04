@@ -98,8 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				FE1F440D2436ED3900DF8F1E /* ContentView.swift */,
-				FE1F44202436F84C00DF8F1E /* CountDownCardView.swift */,
 				FE3C91AE24371FD900E4D4D4 /* NewEventView.swift */,
+				FE3C91B024373B6200E4D4D4 /* Component */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,6 +109,14 @@
 			children = (
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FE3C91B024373B6200E4D4D4 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				FE1F44202436F84C00DF8F1E /* CountDownCardView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CountDownCardView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    var selectedEvent: Event?
+    var eventTitle: String = "No Title"
     
     var body: some View {
         VStack() {
@@ -34,7 +37,7 @@ struct CountDownCardView: View {
 //                                    )
                     .padding(.trailing, 5)
                 Spacer()
-                Text("Boom's Birthday")
+                Text(selectedEvent?.title ?? eventTitle)
                     .minimumScaleFactor(0.75)
                     .lineLimit(2)
                     .font(.system(size: 25))
@@ -62,6 +65,9 @@ struct CountDownCardView: View {
 }
 
 struct CountDownCardView_Previews: PreviewProvider {
+    var previewEvent = Event()
+    
+    
     static var previews: some View {
         CountDownCardView()
     }
