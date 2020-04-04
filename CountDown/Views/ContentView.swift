@@ -33,23 +33,24 @@ struct ContentView: View {
             .navigationBarItems(
                 leading: Text(todayDate.string(from: Date()))
                     .foregroundColor(.gray),
-                trailing: Image(systemName: "plus")
+                trailing: Button(action: {
+                    self.opacity = 0.5
+                    self.modalNewEventView = true
+                    print("Launch NewEventView from ContentView")
+                }, label: {
+                    Image(systemName: "plus")
+                })
                     .opacity(self.opacity)
                     .scaleEffect(1.5)
-                    .onTapGesture {
-                        self.opacity = 0.5
-                        self.modalNewEventView = true
-                        print("Launch NewEventView from ContentView")
-                }
-                .sheet(isPresented: $modalNewEventView,
-                       onDismiss: {
-                        self.opacity = 1
-                        print("dismiess")
-                },
-                       content: {
-                    NewEventView(onDismiss: self.$modalNewEventView)
-                        .environment(\.managedObjectContext, self.managedObjectContext)
-                })
+                    .sheet(isPresented: $modalNewEventView,
+                           onDismiss: {
+                            self.opacity = 1
+                            print("dismiess")
+                    },
+                           content: {
+                            NewEventView(onDismiss: self.$modalNewEventView)
+                                .environment(\.managedObjectContext, self.managedObjectContext)
+                    })
                 
             )
         }

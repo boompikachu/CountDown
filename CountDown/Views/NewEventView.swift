@@ -22,9 +22,6 @@ struct NewEventView: View {
                 Button(action: { self.onDismiss = false }) {
                     Text("Dismiss")
                 }
-                Button(action: { self.presentationMode.wrappedValue.dismiss() }) {
-                    Text("Dismiss 2")
-                }
             }
             
             Spacer()
@@ -51,6 +48,7 @@ struct NewEventView: View {
                     let event = Event(context: self.managedObjectContext)
                     event.title = self.title
                     try self.managedObjectContext.save()
+                    self.onDismiss = false
                 } catch {
                     print("Coudn't save new events with error: \(error)")
                 }
