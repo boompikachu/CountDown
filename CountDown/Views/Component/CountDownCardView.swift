@@ -13,61 +13,80 @@ struct CountDownCardView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     var selectedEvent: Event?
     var eventTitle: String = "No Title"
+    var eventDate: Date = Date()
+    
+    func getDateFormatter(type: Int) -> DateFormatter{
+        if (type == 1) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "d"
+            return formatter
+        } else if (type == 2) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM"
+            return formatter
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "E"
+            return formatter
+        }
+    }
+    
+    var todayDate: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter
+    }
+    @State var dateView: Bool = false
     
     var body: some View {
-        VStack() {
-            HStack() {
-                Text("36")
-                    .frame(width: 50, height: 50)
-                    .lineLimit(1)
-                    .font(.system(size: 40))
-                    .minimumScaleFactor(0.01)
-                    .padding(10)
-                    .background(
-                        Rectangle()
-                            .opacity(K.cardTextOpacity)
-                            .cornerRadius(9)
-                            .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
-                            .blur(radius: 1)
-                )
-//                                        .overlay(
-//                                            RoundedRectangle(cornerRadius: 18)
-//                                                .stroke(Color.black, lineWidth: 3)
-//
-//                                    )
-                    .padding(.trailing, 5)
-                Spacer()
-                Text(selectedEvent?.title ?? eventTitle)
-                    .minimumScaleFactor(0.75)
-                    .lineLimit(2)
-                    .font(.system(size: 25))
-                    .padding(7)
-                    .background(
-                        Rectangle()
-                            .opacity(K.cardTextOpacity)
-                            .cornerRadius(9)
-                            .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
-                            .blur(radius: 1)
-                )
-                Spacer()
+        HStack {
+            
+            if dateView {
+                Text("18")
+                    .font(.system(size: 36))
+                    .fontWeight(.medium)
+                    .foregroundColor(Color.red)
+                    .frame(width: 55)
+                    .padding(.vertical)
+//                    .padding(.trailing)
+                    .onTapGesture {
+                        self.dateView.toggle()
+                }
+            } else {
+                VStack() {
+                    Text(getDateFormatter(type: 3).string(from: selectedEvent?.date ?? eventDate))
+                        .fontWeight(.medium)
+                        .foregroundColor(Color.gray)
+                    Text(getDateFormatter(type: 1).string(from: selectedEvent?.date ?? eventDate))
+                        .fontWeight(.bold)
+                        .font(.system(size: 25))
+                        .foregroundColor(Color.red)
+                    Text(getDateFormatter(type: 2).string(from: selectedEvent?.date ?? eventDate))
+                        .fontWeight(.medium)
+                        .foregroundColor(Color.black)
+                }
+                .frame(width: 55)
+                .padding(.vertical)
+//                .padding(.trailing)
+                .onTapGesture {
+                    self.dateView.toggle()
+                }
             }
-            .frame(height: 100)
-            .padding()
-            .background(
-                Image("background-demo")
-                    .resizable()
-                    .scaledToFill()
-            )
-                .clipped()
-                .cornerRadius(9)
+            
+            Divider()
+                .padding(.vertical)
+                .padding(.trailing)
+            Text(selectedEvent?.title ?? eventTitle)
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
+            Spacer()
         }
+        .frame(height: 100)
+        .clipped()
     }
 }
 
 struct CountDownCardView_Previews: PreviewProvider {
-    var previewEvent = Event()
-    
-    
     static var previews: some View {
         CountDownCardView()
     }

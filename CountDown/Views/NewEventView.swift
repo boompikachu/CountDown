@@ -15,6 +15,8 @@ struct NewEventView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var title = ""
     @State var description = ""
+    @State var date: Date = Date()
+    
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -25,7 +27,9 @@ struct NewEventView: View {
             }
             
             Spacer()
-            CountDownCardView(eventTitle: title)
+            
+            CountDownCardView(eventTitle: title, eventDate: date, dateView: true)
+                .edgesIgnoringSafeArea(.horizontal)
             Spacer()
             
             VStack() {
@@ -39,6 +43,9 @@ struct NewEventView: View {
                     .padding(.vertical)
                 Text("Date")
                     .font(.headline)
+                DatePicker("Please Enter your date", selection: $date, displayedComponents: .date)
+                    .labelsHidden()
+                    
                 Text("Image")
                     .font(.headline)
             }
@@ -47,6 +54,7 @@ struct NewEventView: View {
                 do {
                     let event = Event(context: self.managedObjectContext)
                     event.title = self.title
+                    event.date = self.date
                     try self.managedObjectContext.save()
                     self.onDismiss = false
                 } catch {
@@ -63,6 +71,7 @@ struct NewEventView: View {
 
 struct NewEventView_Previews: PreviewProvider {
     static var previews: some View {
-        NewEventView(onDismiss: Binding.constant(false))
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return ContentView().environment(\.managedObjectContext, context)
     }
 }

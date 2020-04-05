@@ -20,46 +20,60 @@ struct ContentView: View {
         formatter.dateFormat = "EEEE, MMMM d"
         return formatter
     }
+    init(){
+        UITableView.appearance().backgroundColor = .clear
+//        UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+    }
     
     @State var opacity: Double = 1
     
     var body: some View {
-        NavigationView() {
-            
-            List(events, id: \.self) { event in
-                CountDownCardView(selectedEvent: event)
-            }
-            .navigationBarTitle(Text("Events"), displayMode: .automatic)
-            .navigationBarItems(
-                leading: Text(todayDate.string(from: Date()))
-                    .foregroundColor(.gray),
-                trailing: Button(action: {
-                    self.opacity = 0.5
-                    self.modalNewEventView = true
-                    print("Launch NewEventView from ContentView")
-                }, label: {
-                    Image(systemName: "plus")
-                })
-                    .opacity(self.opacity)
-                    .scaleEffect(1.5)
-                    .sheet(isPresented: $modalNewEventView,
-                           onDismiss: {
-                            self.opacity = 1
-                            print("dismiess")
-                    },
-                           content: {
-                            NewEventView(onDismiss: self.$modalNewEventView)
-                                .environment(\.managedObjectContext, self.managedObjectContext)
-                    })
+        TabView() {
+            NavigationView() {
+                List(events, id: \.self) { event in
+                    CountDownCardView(selectedEvent: event)
+                }
                 
-            )
+                .listStyle(GroupedListStyle())
+                .navigationBarTitle(Text("Events"), displayMode: .automatic)
+                .navigationBarItems(
+                    leading: Text(todayDate.string(from: Date()))
+                        .foregroundColor(.gray),
+                    trailing: Button(action: {
+                        self.opacity = 0.5
+                        self.modalNewEventView = true
+                        print("Launch NewEventView from ContentView")
+                    }, label: {
+                        Image(systemName: "plus")
+                    })
+                        .opacity(self.opacity)
+                        .scaleEffect(1.5)
+                        .sheet(isPresented: $modalNewEventView,
+                               onDismiss: {
+                                self.opacity = 1
+                                print("dismiess")
+                        },
+                               content: {
+                                NewEventView(onDismiss: self.$modalNewEventView)
+                                    .environment(\.managedObjectContext, self.managedObjectContext)
+                        })
+                    
+                )
+            }
+            .tabItem {
+                VStack() {
+                    Image(systemName: K.hourglassSymbol)
+                    Text("Events")
+                }
+                
+            }
         }
-        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return ContentView().environment(\.managedObjectContext, context)
     }
 }
