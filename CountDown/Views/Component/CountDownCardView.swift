@@ -36,15 +36,35 @@ struct CountDownCardView: View {
         formatter.dateFormat = "d"
         return formatter
     }
+    
+    
+    func secondsToDays(seconds: TimeInterval) -> String {
+        print("/////")
+        print(now)
+        print(eventDate)
+        print(seconds.description)
+        if let intSeconds = Double(seconds.description) {
+            let temp = Int(intSeconds/60/60/24)
+            return String(temp)
+        }
+        return "x"
+    }
+    
     @State var dateView: Bool = false
+    
+    
+    
+    let now = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date()) ?? Date()
+    let tomorrow = Date().addingTimeInterval(86400)
+    
     
     var body: some View {
         HStack {
-            
-            if dateView {
-                Text("18")
+            if !dateView {
+                Text(secondsToDays(seconds: now.distance(to: selectedEvent?.date ?? eventDate)))
                     .font(.system(size: 36))
                     .fontWeight(.medium)
+                    .minimumScaleFactor(0.01)
                     .foregroundColor(Color.red)
                     .frame(width: 55)
                     .padding(.vertical)
@@ -77,6 +97,8 @@ struct CountDownCardView: View {
                 .padding(.vertical)
                 .padding(.trailing)
             Text(selectedEvent?.title ?? eventTitle)
+                .font(.system(size: 21))
+                .fontWeight(.medium)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
             Spacer()

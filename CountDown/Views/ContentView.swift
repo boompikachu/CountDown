@@ -22,7 +22,20 @@ struct ContentView: View {
     }
     init(){
         UITableView.appearance().backgroundColor = .clear
-//        UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        //        UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+    }
+    
+    func removeEvent(at offsets: IndexSet) {
+        for index in offsets {
+            let event = events[index]
+            managedObjectContext.delete(event)
+        }
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print("Error saving context after delete: \(error)")
+        }
     }
     
     @State var opacity: Double = 1
@@ -30,10 +43,11 @@ struct ContentView: View {
     var body: some View {
         TabView() {
             NavigationView() {
-                List(events, id: \.self) { event in
-                    CountDownCardView(selectedEvent: event)
+                List() {
+                    ForEach(events, id: \.self) { event in
+                        CountDownCardView(selectedEvent: event)
+                    }
                 }
-                
                 .listStyle(GroupedListStyle())
                 .navigationBarTitle(Text("Events"), displayMode: .automatic)
                 .navigationBarItems(
