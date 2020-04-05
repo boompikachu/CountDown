@@ -21,6 +21,7 @@ struct ContentView: View {
         return formatter
     }
     init(){
+//        UITableView.appearance().separatorStyle = .none
         UITableView.appearance().backgroundColor = .clear
         //        UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
     }
@@ -46,7 +47,8 @@ struct ContentView: View {
                 List() {
                     ForEach(events, id: \.self) { event in
                         CountDownCardView(selectedEvent: event)
-                    }
+                        .listRowInsets(EdgeInsets())
+                    }.onDelete(perform: removeEvent)
                 }
                 .listStyle(GroupedListStyle())
                 .navigationBarTitle(Text("Events"), displayMode: .automatic)
@@ -59,6 +61,7 @@ struct ContentView: View {
                         print("Launch NewEventView from ContentView")
                     }, label: {
                         Image(systemName: "plus")
+                            .foregroundColor(Color.primary)
                     })
                         .opacity(self.opacity)
                         .scaleEffect(1.5)

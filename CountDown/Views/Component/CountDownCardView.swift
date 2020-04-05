@@ -68,7 +68,8 @@ struct CountDownCardView: View {
                     .foregroundColor(Color.red)
                     .frame(width: 55)
                     .padding(.vertical)
-//                    .padding(.trailing)
+                    .padding(.leading)
+//                                        .padding(.trailing, 0)
                     .onTapGesture {
                         self.dateView.toggle()
                 }
@@ -83,17 +84,19 @@ struct CountDownCardView: View {
                         .foregroundColor(Color.red)
                     Text(getDateFormatter(type: 2).string(from: selectedEvent?.date ?? eventDate))
                         .fontWeight(.medium)
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.primary)
                 }
                 .frame(width: 55)
                 .padding(.vertical)
-//                .padding(.trailing)
-                .onTapGesture {
-                    self.dateView.toggle()
+                .padding(.leading)
+//                                    .padding(.trailing, 0)
+                    .onTapGesture {
+                        self.dateView.toggle()
                 }
             }
             
             Divider()
+                .foregroundColor(Color.secondary)
                 .padding(.vertical)
                 .padding(.trailing)
             Text(selectedEvent?.title ?? eventTitle)
@@ -104,7 +107,19 @@ struct CountDownCardView: View {
             Spacer()
         }
         .frame(height: 100)
-        .clipped()
+        .background(
+            ZStack {
+                Image("background-demo")
+                    .resizable()
+//                    .clipped()
+                    .scaledToFill()
+//                    .frame(height: 100)
+                    .clipped()
+                Rectangle()
+                    .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
+                    .opacity(colorScheme == .dark ? 0.6 : 0.7)
+            }
+        )
     }
 }
 

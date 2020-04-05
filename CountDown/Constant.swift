@@ -12,6 +12,7 @@ import SwiftUI
 class K {
     static let cardTextOpacity = 0.65
     static let hourglassSymbol = "hourglass"
+    static let cardRadius = 9
 }
 
 extension Binding {
