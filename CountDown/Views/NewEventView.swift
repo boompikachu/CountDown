@@ -19,122 +19,127 @@ struct NewEventView: View {
     
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Button(action: {
-                self.onDismiss = false
-            }) {
-                Text("Dismiss")
-            }
-            
-            Spacer()
-            
-            CountDownCardView(eventTitle: title, eventDate: date, dateView: true)
-                .cornerRadius(CGFloat(K.cardRadius))
-                .overlay(
-                    RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
-                        .stroke(Color.primary, lineWidth: 1)
-            )
+        NavigationView() {
+            VStack(alignment: .leading) {
                 
-            
-            Spacer()
-            
-            
-            Group() {
-                Text("Title")
-                    .font(.headline)
-                TextField("Enter the title", text: $title)
-                    .padding(.vertical)
-                Text("Description")
-                    .font(.headline)
-                TextField("Enter the description", text: $description)
-                    .padding(.vertical)
-                Text("Date")
-                    .font(.headline)
-                DatePicker("Please Enter your date", selection: $date, displayedComponents: .date)
-                    .labelsHidden()
+                Spacer()
                 
-                Text("Image")
-                    .font(.headline)
-                Button(action: {
-                    //
-                }) {
-                    Text("Click here")
-                }
-            }
-            
-            HStack() {
+                CountDownCardView(eventTitle: title, eventDate: date, dateView: true)
+                    // The image inside this view blocks button
+                    .cornerRadius(CGFloat(K.cardRadius))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+                            .stroke(Color.primary, lineWidth: 1)
+                )
+                
+                
                 Spacer()
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-
-                        Button(action: {
-                            //
-                        }) {
-                            Circle()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.red)
-                        }
-                        Button(action: {
-                            //
-                        }) {
-                            Circle()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.blue)
-                        }
-                        Button(action: {
-                            //
-                        }) {
-                            Circle()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.green)
-                        }
-                        Button(action: {
-                            //
-                        }) {
-                            Circle()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.yellow)
-                        }
-                        Button(action: {
-                            //
-                        }) {
-                            Circle()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(Color.purple)
-                        }
-
-                    }
-
-                }
-                Spacer()
-                Button(action: {
-                    do {
-                        let event = Event(context: self.managedObjectContext)
-                        event.title = self.title
-                        event.date = self.date
-                        try self.managedObjectContext.save()
-                        self.onDismiss = false
-                    } catch {
-                        print("Coudn't save new events with error: \(error)")
-                    }
-                }) {
-                    Text("Save")
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color.primary)
+                
+                
+                Group() {
+                    Text("Title")
+                        .font(.headline)
+                    TextField("Enter the title", text: $title)
                         .padding(.vertical)
-                        .padding(.horizontal, 20)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
-                                .stroke(Color.primary, lineWidth: 5)
-                    )
-                        .cornerRadius(CGFloat(K.cardRadius))
-                        .padding()
+                    Text("Description")
+                        .font(.headline)
+                    TextField("Enter the description", text: $description)
+                        .padding(.vertical)
+                    Text("Date")
+                        .font(.headline)
+                    DatePicker("Please Enter your date", selection: $date, displayedComponents: .date)
+                        .labelsHidden()
+                    
+                    Text("Image")
+                        .font(.headline)
+                    Button(action: {
+                        //
+                    }) {
+                        Text("Click here")
+                    }
                 }
+                
+                HStack() {
+                    Spacer()
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            
+                            Button(action: {
+                                //
+                            }) {
+                                Circle()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(Color.red)
+                            }
+                            Button(action: {
+                                //
+                            }) {
+                                Circle()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(Color.blue)
+                            }
+                            Button(action: {
+                                //
+                            }) {
+                                Circle()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(Color.green)
+                            }
+                            Button(action: {
+                                //
+                            }) {
+                                Circle()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(Color.yellow)
+                            }
+                            Button(action: {
+                                //
+                            }) {
+                                Circle()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(Color.purple)
+                            }
+                            
+                        }
+                        
+                    }
+                    Spacer()
+                    Button(action: {
+                        do {
+                            let event = Event(context: self.managedObjectContext)
+                            event.title = self.title
+                            event.date = self.date
+                            try self.managedObjectContext.save()
+                            self.onDismiss = false
+                        } catch {
+                            print("Coudn't save new events with error: \(error)")
+                        }
+                    }) {
+                        Text("Save")
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.primary)
+                            .padding(.vertical)
+                            .padding(.horizontal, 20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+                                    .stroke(Color.primary, lineWidth: 5)
+                        )
+                            .cornerRadius(CGFloat(K.cardRadius))
+                            .padding()
+                    }
+                }
+                .frame(height: 75)
+                
             }
-            .frame(height: 75)
-            
+            .padding()
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarItems(leading:
+                Button(action: {
+                    self.onDismiss = false
+                }) {
+                    Text("Dismiss")
+            })
         }
-        .padding()
         
     }
 }

@@ -111,15 +111,15 @@ struct CountDownCardView: View {
             ZStack {
                 Image("background-demo")
                     .resizable()
-//                    .clipped()
                     .scaledToFill()
-//                    .frame(height: 100)
-                    .clipped()
+                    
                 Rectangle()
                     .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
                     .opacity(colorScheme == .dark ? 0.6 : 0.7)
             }
+            .frame(height: 100)
         )
+        .clipped()
     }
 }
 
