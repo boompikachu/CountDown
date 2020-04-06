@@ -16,6 +16,9 @@ struct NewEventView: View {
     @State var title = ""
     @State var description = ""
     @State var date: Date = Date()
+    @State var sheetRKCalendarView = false
+    
+    var rkManager1 = RKManager(calendar: Calendar.current, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60*60*24*365*10), mode: 0)
     
     
     var body: some View {
@@ -47,8 +50,29 @@ struct NewEventView: View {
                         .padding(.vertical)
                     Text("Date")
                         .font(.headline)
-                    DatePicker("Please Enter your date", selection: $date, displayedComponents: .date)
-                        .labelsHidden()
+                    //                    DatePicker("Please Enter your date", selection: $date, displayedComponents: .date)
+                    //                        .labelsHidden()
+                    Button(action: { self.sheetRKCalendarView = true }) {
+                        Text("Select Date")
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.secondary)
+                            .padding(.vertical)
+                            .padding(.horizontal, 20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+                                    .stroke(Color.secondary, lineWidth: 5)
+                        )
+                            .cornerRadius(CGFloat(K.cardRadius))
+                            .padding(.vertical)
+                    }.sheet(isPresented: self.$sheetRKCalendarView, content: {
+                        RKViewController(isPresented: self.$sheetRKCalendarView, rkManager: self.rkManager1)
+                            .onDisappear() {
+                                if let safeSelectedDate = self.rkManager1.selectedDate {
+                                    self.date = safeSelectedDate
+                                }
+                                
+                        }
+                    })
                     
                     Text("Image")
                         .font(.headline)

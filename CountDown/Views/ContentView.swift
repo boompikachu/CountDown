@@ -13,7 +13,7 @@ struct ContentView: View {
     
     @FetchRequest(entity: Event.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Event.date, ascending: true)]) var events: FetchedResults<Event>
     @Environment(\.managedObjectContext) var managedObjectContext
-    @State var modalNewEventView = false
+    @State var sheetNewEventView = false
     
     var todayDate: DateFormatter {
         let formatter = DateFormatter()
@@ -57,7 +57,7 @@ struct ContentView: View {
                         .foregroundColor(.gray),
                     trailing: Button(action: {
                         self.opacity = 0.5
-                        self.modalNewEventView = true
+                        self.sheetNewEventView = true
                         print("Launch NewEventView from ContentView")
                     }, label: {
                         Image(systemName: "plus")
@@ -65,13 +65,13 @@ struct ContentView: View {
                     })
                         .opacity(self.opacity)
                         .scaleEffect(1.5)
-                        .sheet(isPresented: $modalNewEventView,
+                        .sheet(isPresented: $sheetNewEventView,
                                onDismiss: {
                                 self.opacity = 1
                                 print("dismiess")
                         },
                                content: {
-                                NewEventView(onDismiss: self.$modalNewEventView)
+                                NewEventView(onDismiss: self.$sheetNewEventView)
                                     .environment(\.managedObjectContext, self.managedObjectContext)
                         })
                     

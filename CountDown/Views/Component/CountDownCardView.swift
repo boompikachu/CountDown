@@ -66,7 +66,7 @@ struct CountDownCardView: View {
                     .fontWeight(.medium)
                     .minimumScaleFactor(0.01)
                     .foregroundColor(Color.red)
-                    .frame(width: 55)
+                    .frame(width: 60)
                     .padding(.vertical)
                     .padding(.leading)
 //                                        .padding(.trailing, 0)
@@ -86,7 +86,7 @@ struct CountDownCardView: View {
                         .fontWeight(.medium)
                         .foregroundColor(Color.primary)
                 }
-                .frame(width: 55)
+                .frame(width: 60)
                 .padding(.vertical)
                 .padding(.leading)
 //                                    .padding(.trailing, 0)
