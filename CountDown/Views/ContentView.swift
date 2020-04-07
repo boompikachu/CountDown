@@ -56,12 +56,13 @@ struct ContentView: View {
                     leading: Text(todayDate.string(from: Date()))
                         .foregroundColor(.gray),
                     trailing: Button(action: {
-                        self.opacity = 0.5
+                        self.opacity = 0.99
                         self.sheetNewEventView = true
                         print("Launch NewEventView from ContentView")
                     }, label: {
                         Image(systemName: "plus")
                             .foregroundColor(Color.primary)
+                        .frame(width: 50, height: 50)
                     })
                         .opacity(self.opacity)
                         .scaleEffect(1.5)

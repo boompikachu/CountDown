@@ -14,6 +14,7 @@ struct CountDownCardView: View {
     var selectedEvent: Event?
     var eventTitle: String = "No Title"
     var eventDate: Date = Date()
+    var eventImage: UIImage?
     
     func getDateFormatter(type: Int) -> DateFormatter{
         if (type == 1) {
@@ -109,9 +110,15 @@ struct CountDownCardView: View {
         .frame(height: 100)
         .background(
             ZStack {
-                Image("background-demo")
-                    .resizable()
-                    .scaledToFill()
+                if  eventImage == nil{
+                    Image("background-demo")
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Image(uiImage: eventImage!)
+                        .resizable()
+                        .scaledToFill()
+                }
                     
                 Rectangle()
                     .foregroundColor(colorScheme == .dark ? Color.black : Color.white)

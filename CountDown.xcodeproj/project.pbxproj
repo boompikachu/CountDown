@@ -24,6 +24,8 @@
 		FE76301A243B2C2C00648E4D /* RKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE763013243B2C2C00648E4D /* RKManager.swift */; };
 		FE76301B243B2C2C00648E4D /* RKWeekdayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE763014243B2C2C00648E4D /* RKWeekdayHeader.swift */; };
 		FE76301C243B2C2C00648E4D /* RKMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE763015243B2C2C00648E4D /* RKMonth.swift */; };
+		FE76E2A1243B39F30096F45B /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = FE76E2A0243B39F30096F45B /* LICENSE.txt */; };
+		FEA504B4243C7FDB00887922 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA504B3243C7FDB00887922 /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		FE763013243B2C2C00648E4D /* RKManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKManager.swift; sourceTree = "<group>"; };
 		FE763014243B2C2C00648E4D /* RKWeekdayHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKWeekdayHeader.swift; sourceTree = "<group>"; };
 		FE763015243B2C2C00648E4D /* RKMonth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKMonth.swift; sourceTree = "<group>"; };
+		FE76E2A0243B39F30096F45B /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		FEA504B3243C7FDB00887922 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 			children = (
 				FE1F440D2436ED3900DF8F1E /* ContentView.swift */,
 				FE3C91AE24371FD900E4D4D4 /* NewEventView.swift */,
+				FEA504B3243C7FDB00887922 /* ImagePicker.swift */,
 				FE3C91B024373B6200E4D4D4 /* Component */,
 			);
 			path = Views;
@@ -144,6 +149,7 @@
 				FE763015243B2C2C00648E4D /* RKMonth.swift */,
 				FE763010243B2C2C00648E4D /* RKViewController.swift */,
 				FE763014243B2C2C00648E4D /* RKWeekdayHeader.swift */,
+				FE76E2A0243B39F30096F45B /* LICENSE.txt */,
 			);
 			path = RKCalendar;
 			sourceTree = "<group>";
@@ -206,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE76E2A1243B39F30096F45B /* LICENSE.txt in Resources */,
 				FE1F44162436ED3E00DF8F1E /* LaunchScreen.storyboard in Resources */,
 				FE1F44132436ED3E00DF8F1E /* Preview Assets.xcassets in Resources */,
 				FE1F44102436ED3E00DF8F1E /* Assets.xcassets in Resources */,
@@ -231,6 +238,7 @@
 				FE76301C243B2C2C00648E4D /* RKMonth.swift in Sources */,
 				FE763019243B2C2C00648E4D /* RKCell.swift in Sources */,
 				FE763017243B2C2C00648E4D /* RKViewController.swift in Sources */,
+				FEA504B4243C7FDB00887922 /* ImagePicker.swift in Sources */,
 				FE3C91AF24371FD900E4D4D4 /* NewEventView.swift in Sources */,
 				FE76301B243B2C2C00648E4D /* RKWeekdayHeader.swift in Sources */,
 			);

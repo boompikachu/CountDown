@@ -17,8 +17,14 @@ struct NewEventView: View {
     @State var description = ""
     @State var date: Date = Date()
     @State var sheetRKCalendarView = false
+    @State private var sheetImagePickerView = false
+    @State private var selectedPhoto: UIImage?
     
     var rkManager1 = RKManager(calendar: Calendar.current, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60*60*24*365*10), mode: 0)
+    
+    func loadSelectedPhoto() {
+        
+    }
     
     
     var body: some View {
@@ -27,7 +33,7 @@ struct NewEventView: View {
                 
                 Spacer()
                 
-                CountDownCardView(eventTitle: title, eventDate: date, dateView: true)
+                CountDownCardView(eventTitle: title, eventDate: date, eventImage: selectedPhoto, dateView: true)
                     // The image inside this view blocks button
                     .cornerRadius(CGFloat(K.cardRadius))
                     .overlay(
@@ -76,17 +82,59 @@ struct NewEventView: View {
                     
                     Text("Image")
                         .font(.headline)
-                    Button(action: {
-                        //
-                    }) {
-                        Text("Click here")
+                    HStack {
+                        Button(action: {
+                        
+                       }) {
+                            Text("Unsplash")
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.secondary)
+                                .padding(.vertical)
+                                .padding(.horizontal, 20)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+                                        .stroke(Color.secondary, lineWidth: 5)
+                            )
+                                .cornerRadius(CGFloat(K.cardRadius))
+                                .padding(.vertical)
+                        }
+                        Button(action: {
+                         
+                        }) {
+                             Text("Pallettes")
+                                 .fontWeight(.semibold)
+                                 .foregroundColor(Color.secondary)
+                                 .padding(.vertical)
+                                 .padding(.horizontal, 20)
+                                 .overlay(
+                                     RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+                                         .stroke(Color.secondary, lineWidth: 5)
+                             )
+                                 .cornerRadius(CGFloat(K.cardRadius))
+                                 .padding(.vertical)
+                         }
+                        Button(action: {
+                            self.sheetImagePickerView = true
+                        }) {
+                             Text("Photo")
+                                 .fontWeight(.semibold)
+                                 .foregroundColor(Color.secondary)
+                                 .padding(.vertical)
+                                 .padding(.horizontal, 20)
+                                 .overlay(
+                                     RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+                                         .stroke(Color.secondary, lineWidth: 5)
+                             )
+                                 .cornerRadius(CGFloat(K.cardRadius))
+                                 .padding(.vertical)
+                         }
                     }
                 }
                 
                 HStack() {
                     Spacer()
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
+                        HStack { // Delete and make new views
                             
                             Button(action: {
                                 //
@@ -133,6 +181,9 @@ struct NewEventView: View {
                             let event = Event(context: self.managedObjectContext)
                             event.title = self.title
                             event.date = self.date
+                            
+                            event.image = self.selectedPhoto?.pngData()
+                            
                             try self.managedObjectContext.save()
                             self.onDismiss = false
                         } catch {
@@ -163,6 +214,9 @@ struct NewEventView: View {
                 }) {
                     Text("Dismiss")
             })
+        }
+        .sheet(isPresented: self.$sheetImagePickerView, onDismiss: loadSelectedPhoto) {
+            ImagePicker(image: self.$selectedPhoto)
         }
         
     }
