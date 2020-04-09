@@ -70,7 +70,7 @@ struct ContentView: View {
                         .sheet(isPresented: $sheetNewEventView,
                                onDismiss: {
                                 self.opacity = 1
-                                print("dismiess")
+                                print("dismiss")
                         },
                                content: {
                                 NewEventView(onDismiss: self.$sheetNewEventView)

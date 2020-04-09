@@ -118,7 +118,7 @@ struct CountDownCardView: View {
                     
                 Rectangle()
                     .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
-                    .opacity(colorScheme == .dark ? 0.6 : 0.65)
+                    .opacity(colorScheme == .dark ? 0.6 : 0.5)
             }
             .frame(height: 100)
         )
