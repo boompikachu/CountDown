@@ -40,10 +40,6 @@ struct CountDownCardView: View {
     
     
     func secondsToDays(seconds: TimeInterval) -> String {
-        print("/////")
-        print(now)
-        print(eventDate)
-        print(seconds.description)
         if let intSeconds = Double(seconds.description) {
             let temp = Int(intSeconds/60/60/24)
             return String(temp)
@@ -110,11 +106,11 @@ struct CountDownCardView: View {
         .frame(height: 100)
         .background(
             ZStack {
-                if  eventImage == nil{
-                    Image("background-demo")
+                if selectedEvent?.image != nil{
+                    Image(uiImage: UIImage(data: (selectedEvent?.image)!)!)
                         .resizable()
                         .scaledToFill()
-                } else {
+                } else if eventImage != nil {
                     Image(uiImage: eventImage!)
                         .resizable()
                         .scaledToFill()
@@ -122,7 +118,7 @@ struct CountDownCardView: View {
                     
                 Rectangle()
                     .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
-                    .opacity(colorScheme == .dark ? 0.6 : 0.7)
+                    .opacity(colorScheme == .dark ? 0.6 : 0.65)
             }
             .frame(height: 100)
         )

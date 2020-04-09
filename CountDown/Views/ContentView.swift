@@ -14,6 +14,7 @@ struct ContentView: View {
     @FetchRequest(entity: Event.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Event.date, ascending: true)]) var events: FetchedResults<Event>
     @Environment(\.managedObjectContext) var managedObjectContext
     @State var sheetNewEventView = false
+    @State var opacity: Double = 1
     
     var todayDate: DateFormatter {
         let formatter = DateFormatter()
@@ -39,7 +40,7 @@ struct ContentView: View {
         }
     }
     
-    @State var opacity: Double = 1
+    
     
     var body: some View {
         TabView() {

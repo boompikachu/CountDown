@@ -19,13 +19,12 @@ struct NewEventView: View {
     @State var sheetRKCalendarView = false
     @State private var sheetImagePickerView = false
     @State private var selectedPhoto: UIImage?
+    @State private var sheetUnsplashView = false
+    
+    // Sheet bug temp
+    @State private var opacity: Double = 1
     
     var rkManager1 = RKManager(calendar: Calendar.current, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60*60*24*365*10), mode: 0)
-    
-    func loadSelectedPhoto() {
-        
-    }
-    
     
     var body: some View {
         NavigationView() {
@@ -84,9 +83,28 @@ struct NewEventView: View {
                         .font(.headline)
                     HStack {
                         Button(action: {
-                        
-                       }) {
+                            self.sheetUnsplashView = true
+                        }) {
                             Text("Unsplash")
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.secondary)
+                                .padding(.vertical)
+                                .padding(.horizontal, 20)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+                                        .stroke(Color.secondary, lineWidth: 5)
+                            )
+                                .cornerRadius(CGFloat(K.cardRadius))
+                                .padding(.vertical)
+                        }.sheet(isPresented: self.$sheetUnsplashView, onDismiss: {
+                            self.sheetUnsplashView = false
+                        }) {
+                            UnsplashPickerView(image: self.$selectedPhoto)
+                        }
+                        Button(action: {
+                            
+                        }) {
+                            Text("Pallettes")
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color.secondary)
                                 .padding(.vertical)
@@ -99,35 +117,25 @@ struct NewEventView: View {
                                 .padding(.vertical)
                         }
                         Button(action: {
-                         
-                        }) {
-                             Text("Pallettes")
-                                 .fontWeight(.semibold)
-                                 .foregroundColor(Color.secondary)
-                                 .padding(.vertical)
-                                 .padding(.horizontal, 20)
-                                 .overlay(
-                                     RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
-                                         .stroke(Color.secondary, lineWidth: 5)
-                             )
-                                 .cornerRadius(CGFloat(K.cardRadius))
-                                 .padding(.vertical)
-                         }
-                        Button(action: {
+                            self.opacity = 0.99
                             self.sheetImagePickerView = true
                         }) {
-                             Text("Photo")
-                                 .fontWeight(.semibold)
-                                 .foregroundColor(Color.secondary)
-                                 .padding(.vertical)
-                                 .padding(.horizontal, 20)
-                                 .overlay(
-                                     RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
-                                         .stroke(Color.secondary, lineWidth: 5)
-                             )
-                                 .cornerRadius(CGFloat(K.cardRadius))
-                                 .padding(.vertical)
-                         }
+                            Text("Photo")
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.secondary)
+                                .opacity(opacity)
+                                .padding(.vertical)
+                                .padding(.horizontal, 20)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+                                        .stroke(Color.secondary, lineWidth: 5)
+                            )
+                                .cornerRadius(CGFloat(K.cardRadius))
+                                .padding(.vertical)
+                        }
+                        .sheet(isPresented: self.$sheetImagePickerView, onDismiss: { self.opacity = 1; self.sheetImagePickerView = false }) {
+                            ImagePicker(image: self.$selectedPhoto)
+                        }
                     }
                 }
                 
@@ -212,12 +220,12 @@ struct NewEventView: View {
                 Button(action: {
                     self.onDismiss = false
                 }) {
-                    Text("Dismiss")
+                    Text("Cancel")
+                        .foregroundColor(Color.primary)
             })
         }
-        .sheet(isPresented: self.$sheetImagePickerView, onDismiss: loadSelectedPhoto) {
-            ImagePicker(image: self.$selectedPhoto)
-        }
+        
+        
         
     }
 }
