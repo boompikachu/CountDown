@@ -20,7 +20,7 @@ struct NewEventView: View {
     @State private var sheetImagePickerView = false
     @State private var selectedPhoto: UIImage?
     @State private var sheetUnsplashView = false
-    @State private var selectedTextColor: Color = .red
+    @State private var selectedTextColor: UIColor = .red
     
     // Sheet bug temp
     @State private var opacity: Double = 1
@@ -146,35 +146,35 @@ struct NewEventView: View {
                         HStack { // Delete and make new views
                             
                             Button(action: {
-                                self.selectedTextColor = Color.red
+                                self.selectedTextColor = .red
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.red)
                             }
                             Button(action: {
-                                self.selectedTextColor = Color.blue
+                                self.selectedTextColor = .blue
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.blue)
                             }
                             Button(action: {
-                                self.selectedTextColor = Color.green
+                                self.selectedTextColor = .green
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.green)
                             }
                             Button(action: {
-                                self.selectedTextColor = Color.yellow
+                                self.selectedTextColor = .yellow
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.yellow)
                             }
                             Button(action: {
-                                self.selectedTextColor = Color.purple
+                                self.selectedTextColor = .purple
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
@@ -191,8 +191,7 @@ struct NewEventView: View {
                             event.title = self.title
                             event.date = self.date
                             event.image = self.selectedPhoto?.pngData()
-                            
-                            
+                            event.color = self.selectedTextColor
                             
                             try self.managedObjectContext.save()
                             self.onDismiss = false

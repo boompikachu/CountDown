@@ -15,7 +15,7 @@ struct CountDownCardView: View {
     var eventTitle: String = "No Title"
     var eventDate: Date = Date()
     var eventImage: UIImage?
-    @Binding var textColor: Color
+    @Binding var textColor: UIColor
     
     func getDateFormatter(type: Int) -> DateFormatter{
         if (type == 1) {
@@ -39,6 +39,15 @@ struct CountDownCardView: View {
         return formatter
     }
     
+//    func getColour(data: Data) -> Color {
+//        do {
+//            return try Color(NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data)!)
+//        } catch {
+//            print(error)
+//        }
+//
+//        return Color.clear
+//    }
     
     func secondsToDays(seconds: TimeInterval) -> String {
         if let intSeconds = Double(seconds.description) {
@@ -63,8 +72,9 @@ struct CountDownCardView: View {
                     .font(.system(size: 36))
                     .fontWeight(.medium)
                     .minimumScaleFactor(0.01)
-                    .foregroundColor(textColor)
+                    .foregroundColor(((selectedEvent?.color as? UIColor) != nil) ? Color(self.selectedEvent?.color as! UIColor) : Color(textColor))
                     .frame(width: 60)
+                    
                     .padding(.vertical)
                     .padding(.leading)
 //                                        .padding(.trailing, 0)
@@ -79,7 +89,7 @@ struct CountDownCardView: View {
                     Text(getDateFormatter(type: 1).string(from: selectedEvent?.date ?? eventDate))
                         .fontWeight(.bold)
                         .font(.system(size: 25))
-                        .foregroundColor(textColor)
+                        .foregroundColor(((selectedEvent?.color as? UIColor) != nil) ? Color(self.selectedEvent?.color as! UIColor) : Color(textColor))
                     Text(getDateFormatter(type: 2).string(from: selectedEvent?.date ?? eventDate))
                         .fontWeight(.medium)
                         .foregroundColor(Color.primary)
