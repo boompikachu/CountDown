@@ -20,6 +20,7 @@ struct NewEventView: View {
     @State private var sheetImagePickerView = false
     @State private var selectedPhoto: UIImage?
     @State private var sheetUnsplashView = false
+    @State private var selectedTextColor: Color = .red
     
     // Sheet bug temp
     @State private var opacity: Double = 1
@@ -32,7 +33,7 @@ struct NewEventView: View {
                 
                 Spacer()
                 
-                CountDownCardView(eventTitle: title, eventDate: date, eventImage: selectedPhoto, dateView: true)
+                CountDownCardView(eventTitle: title, eventDate: date, eventImage: selectedPhoto, textColor: $selectedTextColor, dateView: true)
                     // The image inside this view blocks button
                     .cornerRadius(CGFloat(K.cardRadius))
                     .overlay(
@@ -101,21 +102,21 @@ struct NewEventView: View {
                         }) {
                             UnsplashPickerView(image: self.$selectedPhoto)
                         }
-                        Button(action: {
-                            
-                        }) {
-                            Text("Pallettes")
-                                .fontWeight(.semibold)
-                                .foregroundColor(Color.secondary)
-                                .padding(.vertical)
-                                .padding(.horizontal, 20)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
-                                        .stroke(Color.secondary, lineWidth: 5)
-                            )
-                                .cornerRadius(CGFloat(K.cardRadius))
-                                .padding(.vertical)
-                        }
+//                        Button(action: {
+//
+//                        }) {
+//                            Text("Pallettes")
+//                                .fontWeight(.semibold)
+//                                .foregroundColor(Color.secondary)
+//                                .padding(.vertical)
+//                                .padding(.horizontal, 20)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: CGFloat(K.cardRadius))
+//                                        .stroke(Color.secondary, lineWidth: 5)
+//                            )
+//                                .cornerRadius(CGFloat(K.cardRadius))
+//                                .padding(.vertical)
+//                        }
                         Button(action: {
                             self.opacity = 0.99
                             self.sheetImagePickerView = true
@@ -145,35 +146,35 @@ struct NewEventView: View {
                         HStack { // Delete and make new views
                             
                             Button(action: {
-                                //
+                                self.selectedTextColor = Color.red
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.red)
                             }
                             Button(action: {
-                                //
+                                self.selectedTextColor = Color.blue
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.blue)
                             }
                             Button(action: {
-                                //
+                                self.selectedTextColor = Color.green
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.green)
                             }
                             Button(action: {
-                                //
+                                self.selectedTextColor = Color.yellow
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.yellow)
                             }
                             Button(action: {
-                                //
+                                self.selectedTextColor = Color.purple
                             }) {
                                 Circle()
                                     .frame(width: 40, height: 40)
@@ -189,8 +190,9 @@ struct NewEventView: View {
                             let event = Event(context: self.managedObjectContext)
                             event.title = self.title
                             event.date = self.date
-                            
                             event.image = self.selectedPhoto?.pngData()
+                            
+                            
                             
                             try self.managedObjectContext.save()
                             self.onDismiss = false

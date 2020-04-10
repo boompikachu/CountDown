@@ -47,7 +47,7 @@ struct ContentView: View {
             NavigationView() {
                 List() {
                     ForEach(events, id: \.self) { event in
-                        CountDownCardView(selectedEvent: event)
+                        CountDownCardView(selectedEvent: event, textColor: Binding.constant(.blue))
                         .listRowInsets(EdgeInsets())
                     }.onDelete(perform: removeEvent)
                 }

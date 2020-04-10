@@ -15,6 +15,7 @@ struct CountDownCardView: View {
     var eventTitle: String = "No Title"
     var eventDate: Date = Date()
     var eventImage: UIImage?
+    @Binding var textColor: Color
     
     func getDateFormatter(type: Int) -> DateFormatter{
         if (type == 1) {
@@ -62,7 +63,7 @@ struct CountDownCardView: View {
                     .font(.system(size: 36))
                     .fontWeight(.medium)
                     .minimumScaleFactor(0.01)
-                    .foregroundColor(Color.red)
+                    .foregroundColor(textColor)
                     .frame(width: 60)
                     .padding(.vertical)
                     .padding(.leading)
@@ -78,7 +79,7 @@ struct CountDownCardView: View {
                     Text(getDateFormatter(type: 1).string(from: selectedEvent?.date ?? eventDate))
                         .fontWeight(.bold)
                         .font(.system(size: 25))
-                        .foregroundColor(Color.red)
+                        .foregroundColor(textColor)
                     Text(getDateFormatter(type: 2).string(from: selectedEvent?.date ?? eventDate))
                         .fontWeight(.medium)
                         .foregroundColor(Color.primary)
@@ -128,6 +129,6 @@ struct CountDownCardView: View {
 
 struct CountDownCardView_Previews: PreviewProvider {
     static var previews: some View {
-        CountDownCardView()
+        CountDownCardView(textColor: Binding.constant(.red))
     }
 }
